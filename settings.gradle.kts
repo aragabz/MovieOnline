@@ -8,6 +8,7 @@ pluginManagement {
         id("com.android.application").version("7.0.1")
         id("com.android.library").version("7.1.0-alpha08")
         id("org.jetbrains.kotlin.android").version("1.5.21")
+        id("org.jetbrains.kotlin.android") version "1.5.21"
     }
 }
 dependencyResolutionManagement {

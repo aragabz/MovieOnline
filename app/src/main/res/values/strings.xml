@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UrMovies</string>
+    <string name="app_name">Movie Online</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="first_fragment">First Fragment</string>
@@ -9,4 +9,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

@@ -6,6 +6,7 @@ object Libs {
         const val MATERIAL = "com.google.android.material:material:1.4.0"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.0"
         const val LEGACY_SUPPORT = "androidx.legacy:legacy-support-v4:1.0.0"
+        const val DATASTORE = "androidx.datastore:datastore:1.0.0"
     }
 
     object Ktx {
