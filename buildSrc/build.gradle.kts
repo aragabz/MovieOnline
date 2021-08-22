@@ -1,5 +1,5 @@
 repositories {
-    google()
+    gradlePluginPortal()
     mavenCentral()
 }
 plugins {

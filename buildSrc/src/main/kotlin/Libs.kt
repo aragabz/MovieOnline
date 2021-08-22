@@ -10,8 +10,8 @@ object Libs {
     }
 
     object Ktx {
-        const val CORE = "androidx.core:core-ktx:1.6.0"
-        const val FRAGMENT = "androidx.fragment:fragment-ktx:1.3.6"
+        const val CORE = "androidx.core:core-ktx:${Versions.CORE_KTX}"
+        const val FRAGMENT = "androidx.fragment:fragment-ktx:${Versions.FRAGMENT_KTX}"
         const val COLLECTION =  "androidx.collection:collection-ktx:${Versions.COLLECTION_KTX}"
     }
 
@@ -27,7 +27,7 @@ object Libs {
     }
 }
 
-object TestLbs {
+object TestLibs {
 
     const val JUNIT = "junit:junit:4.13.2"
 
