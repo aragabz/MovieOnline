@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+
 }
 
 android {
@@ -39,20 +42,31 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(Libs.Helper.KOTLIN_STDLIB)
 
-    implementation(Libs.Ktx.CORE)
-    implementation(Libs.Ktx.COLLECTION)
     implementation(Libs.Helper.APP_COMPAT)
     implementation(Libs.Helper.MATERIAL)
     implementation(Libs.Helper.CONSTRAINT_LAYOUT)
     implementation(Libs.Helper.LEGACY_SUPPORT)
-    implementation(Libs.Lifecycle.LIVE_DATE)
-    implementation(Libs.Lifecycle.VIEW_MODEL_KTX)
-    implementation(Libs.Navigation.FRAGMENT_KTX)
-    implementation(Libs.Navigation.UI_KTX)
+    implementation(Libs.Helper.DATASTORE)
+
+    implementation(Libs.Ktx.CORE_KTX)
+    implementation(Libs.Ktx.COLLECTION_KTX)
+    implementation(Libs.Ktx.FRAGMENT_KTX)
+    implementation(Libs.Ktx.ACTIVITY_KTX)
+
+    implementation(Libs.Lifecycle.LIFECYCLE_LIVE_DATE)
+    implementation(Libs.Lifecycle.LIFECYCLE_VIEW_MODEL_KTX)
+
+    implementation(Libs.Navigation.NAVIGATION_FRAGMENT_KTX)
+    implementation(Libs.Navigation.NAVIGATION_UI_KTX)
+
+    implementation(Libs.DI.HILT_ANDROID)
+    kapt(Libs.DI.HILT_COMPILER)
+
+
     testImplementation(TestLibs.JUNIT)
     androidTestImplementation(TestLibs.TestAndroid.JUNIT)
     androidTestImplementation(TestLibs.TestAndroid.ESPRESSO)
-    implementation(Libs.Helper.DATASTORE)
-    implementation(Libs.Ktx.FRAGMENT)
 }
