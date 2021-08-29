@@ -69,4 +69,9 @@ dependencies {
     testImplementation(TestLibs.JUNIT)
     androidTestImplementation(TestLibs.TestAndroid.JUNIT)
     androidTestImplementation(TestLibs.TestAndroid.ESPRESSO)
+
+    implementation(Libs.Helper.retrofit)
+    implementation(Libs.Helper.retrofitConverterGson)
+    implementation(Libs.Helper.OKHTTP)
+    implementation(Libs.Helper.OKHTTP_LOGGING_INTERCEPTOR)
 }

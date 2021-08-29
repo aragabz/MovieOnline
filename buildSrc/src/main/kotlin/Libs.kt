@@ -19,6 +19,10 @@ object Libs {
         const val OKHTTP_LOGGING_INTERCEPTOR =
             "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
+        // retrofit
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.5.0"
+        const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:2.5.0"
+
         // okio
         const val OKIO = "com.squareup.okio:okio:${Versions.okio}"
 

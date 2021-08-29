@@ -8,3 +8,9 @@ splash |----> Login ---> HomeActivity
                                  |--> Search
                                  |--> profile
                                  |--> setting
+
+
+
+ activity | Fragment --> viewmodel --> repository --> datasource --> 1- remote datasource  --> api
+                                                                     2- local datasource   --> database (room | sqlite | realm | dbflow | greenrebot)
+ 
