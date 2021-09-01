@@ -4,8 +4,9 @@ import com.ragabz.movieonline.data.datasource.MovieDatasource
 import com.ragabz.movieonline.models.Movie
 import com.ragabz.movieonline.models.RecommendedMovie
 import com.ragabz.movieonline.models.Video
+import javax.inject.Inject
 
-class MovieLocalDatasource(val db: MovieDatabase): MovieDatasource {
+class MovieLocalDatasource @Inject constructor(val db: MovieDatabase) : MovieDatasource {
 
     override fun getMoviesList(): List<Movie> {
         TODO("Not yet implemented")
@@ -21,3 +22,4 @@ class MovieLocalDatasource(val db: MovieDatabase): MovieDatasource {
 }
 
 class MovieDatabase
+

@@ -4,8 +4,13 @@ import com.ragabz.movieonline.data.datasource.MovieDatasource
 import com.ragabz.movieonline.models.Movie
 import com.ragabz.movieonline.models.RecommendedMovie
 import com.ragabz.movieonline.models.Video
+import javax.inject.Inject
 
-class MovieRemoteDatasource(val api: MovieApi): MovieDatasource {
+class MovieRemoteDatasource @Inject constructor(
+    val api: MovieApi
+) : MovieDatasource {
+
+
     override fun getMoviesList(): List<Movie> {
         TODO("Not yet implemented")
     }
@@ -19,7 +24,7 @@ class MovieRemoteDatasource(val api: MovieApi): MovieDatasource {
     }
 }
 
-class TMDBRemoteDatasource(val api: TMDBApi): MovieDatasource {
+class TMDBRemoteDatasource(val api: TMDBApi) : MovieDatasource {
     override fun getMoviesList(): List<Movie> {
         TODO("Not yet implemented")
     }

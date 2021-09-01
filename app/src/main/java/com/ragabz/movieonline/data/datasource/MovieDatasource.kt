@@ -12,5 +12,4 @@ interface MovieDatasource {
     fun getMoviesList(): List<Movie>
     fun getRecommendedList(): List<RecommendedMovie>
     fun getVideosList(): List<Video>
-
 }

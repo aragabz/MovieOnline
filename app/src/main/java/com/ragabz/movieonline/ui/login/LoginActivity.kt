@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.ragabz.movieonline.base.BaseViewBindingActivity
 import com.ragabz.movieonline.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding, LoginViewModel>(
     ActivityLoginBinding::inflate
 ) {
