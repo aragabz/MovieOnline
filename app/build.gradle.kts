@@ -74,4 +74,8 @@ dependencies {
     implementation(Libs.Helper.retrofitConverterGson)
     implementation(Libs.Helper.OKHTTP)
     implementation(Libs.Helper.OKHTTP_LOGGING_INTERCEPTOR)
+
+    val room_version = "2.3.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 }

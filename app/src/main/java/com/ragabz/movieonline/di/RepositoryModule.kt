@@ -25,7 +25,7 @@ class RepositoryModule {
     @LocalDatasource
     @Provides
     fun provideMovieLocalDatasource(movieDatabase: MovieDatabase): MovieDatasource {
-        return MovieLocalDatasource(movieDatabase)
+        return MovieLocalDatasource()
     }
 
     @RemoteDatasource
