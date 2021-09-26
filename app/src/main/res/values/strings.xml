@@ -7,8 +7,11 @@
     <string name="switch_view">switch</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_more">More</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="home">Home Fragment</string>
+    <string name="recommendation">Recommendation</string>
 </resources>

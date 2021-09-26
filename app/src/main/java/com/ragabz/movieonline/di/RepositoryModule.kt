@@ -3,6 +3,7 @@ package com.ragabz.movieonline.di
 import com.ragabz.movieonline.data.datasource.MovieDatasource
 import com.ragabz.movieonline.data.local.MovieDatabase
 import com.ragabz.movieonline.data.local.MovieLocalDatasource
+import com.ragabz.movieonline.data.local.daos.MovieDao
 import com.ragabz.movieonline.data.remote.MovieApi
 import com.ragabz.movieonline.data.remote.MovieRemoteDatasource
 import com.ragabz.movieonline.di.qualifiers.LocalDatasource
@@ -24,8 +25,8 @@ class RepositoryModule {
 
     @LocalDatasource
     @Provides
-    fun provideMovieLocalDatasource(movieDatabase: MovieDatabase): MovieDatasource {
-        return MovieLocalDatasource()
+    fun provideMovieLocalDatasource(movieDao: MovieDao): MovieDatasource {
+        return MovieLocalDatasource(movieDao = movieDao)
     }
 
     @RemoteDatasource

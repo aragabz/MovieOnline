@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ragabz.movieonline" >
+    package="com.ragabz.movieonline">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MovieApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieOnline" >
+        android:theme="@style/Theme.MovieOnline">
+        <activity
+            android:name=".ui.main.ui.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.splash.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true"
@@ -34,7 +44,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

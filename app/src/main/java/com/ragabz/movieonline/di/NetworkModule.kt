@@ -1,11 +1,17 @@
 package com.ragabz.movieonline.di
 
-import com.ragabz.movieonline.data.remote.BASE_URL
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.ragabz.movieonline.BuildConfig
 import com.ragabz.movieonline.data.remote.MovieApi
-import com.ragabz.movieonline.data.remote.TMDBApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -19,21 +25,21 @@ class NetworkModule {
 
 
     @Provides
-    fun provideHttpClient(): OkHttpClient {
-       return OkHttpClient.Builder().build()
+    fun provideHttpClient(
+        chuckerInterceptor: ChuckerInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(chuckerInterceptor).build()
     }
 
     @Provides
-    fun provideGson(): GsonConverterFactory = GsonConverterFactory.create()
+    fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: GsonConverterFactory): Retrofit {
-
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         val retrofitBuilder = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(gson)
-
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
         return retrofitBuilder.client(okHttpClient).build()
     }
 
@@ -44,9 +50,28 @@ class NetworkModule {
         return retrofit.create(MovieApi::class.java)
     }
 
-    @Provides
-    fun provideTMDBApi(retrofit: Retrofit): TMDBApi {
-        return retrofit.create(TMDBApi::class.java)
+    fun provideLoggingInterceptor() {
+
     }
+
+    @Provides
+    @Singleton
+    fun provideChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor {
+        val chuckerCollector = ChuckerCollector(
+            context = context,
+            // Toggles visibility of the push notification
+            showNotification = true,
+            // Allows to customize the retention period of collected data
+            retentionPeriod = RetentionManager.Period.ONE_HOUR
+        )
+        val chuckerInterceptor = ChuckerInterceptor.Builder(context)
+            .collector(chuckerCollector)
+            .maxContentLength(250_000L)
+            .redactHeaders("Auth-Token", "Bearer")
+            .alwaysReadResponseBody(true)
+            .build()
+        return chuckerInterceptor
+    }
+
 
 }

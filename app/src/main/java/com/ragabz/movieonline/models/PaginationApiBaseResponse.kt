@@ -16,3 +16,13 @@ data class PaginationApiBaseResponse<T>(
     @SerializedName("total_results")
     val totalResults: Int?
 )
+
+
+data class SearchResult(
+    val page: Int,
+    val results: List<MovieModel>,
+    @SerializedName("total_pages")
+    val totalPages: Int,
+    @SerializedName("total_results")
+    val totalResults: Int
+)
