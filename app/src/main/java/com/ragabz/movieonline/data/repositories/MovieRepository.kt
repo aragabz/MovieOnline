@@ -3,6 +3,7 @@ package com.ragabz.movieonline.data.repositories
 import com.ragabz.movieonline.data.local.daos.MovieDao
 import com.ragabz.movieonline.data.remote.MovieApi
 import com.ragabz.movieonline.di.ContextProviders
+import com.ragabz.movieonline.models.AppResponse
 import com.ragabz.movieonline.models.MovieList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,8 +23,8 @@ class MovieRepository @Inject constructor(
                 val response = movieApi.fetchMoviesList()
                 if (response.isSuccessful) {
                     // save list to database
-                    val list = response.body() as MovieList
-                    movieDao.insert(*list.toTypedArray())
+                    val appResponse = response.body() as AppResponse
+                    movieDao.insert(*(appResponse.results).toTypedArray())
                     // select list from database
                     emit(movieDao.selectAllMovies())
                 }
