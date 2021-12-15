@@ -26,7 +26,7 @@ android {
                 "proguard-rules.pro"
             )
             // base url:   https://tmdb.com/v3/
-            buildConfigField( "String","BASE_URL", "\"https://api.themoviedb.org/3/\"" )
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
         }
 
         getByName("debug") {
@@ -36,11 +36,8 @@ android {
                 "proguard-rules.pro"
             )
             // base url:   https://tmdb.com/v3/
-            buildConfigField( "String","BASE_URL", "\"https://api.themoviedb.org/3/\"" )
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
         }
-
-
-
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -83,7 +80,6 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     kapt(Libs.DI.HILT_COMPILER)
 
-
     testImplementation(TestLibs.JUNIT)
     androidTestImplementation(TestLibs.TestAndroid.JUNIT)
     androidTestImplementation(TestLibs.TestAndroid.ESPRESSO)
@@ -102,6 +98,9 @@ dependencies {
     implementation(Libs.Helper.GLIDE)
     kapt(Libs.Helper.GLIDE_COMPILER)
 
-    debugImplementation ("com.github.chuckerteam.chucker:library:3.5.2")
-    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC2 ")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-RC2 ")
 }
