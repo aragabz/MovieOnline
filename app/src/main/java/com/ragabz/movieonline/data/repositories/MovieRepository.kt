@@ -1,20 +1,45 @@
 package com.ragabz.movieonline.data.repositories
 
-
-import com.ragabz.movieonline.data.datasource.MovieDatasource
-import com.ragabz.movieonline.di.qualifiers.LocalDatasource
-import com.ragabz.movieonline.di.qualifiers.RemoteDatasource
-import com.ragabz.movieonline.models.SearchResult
-import retrofit2.Call
+import com.ragabz.movieonline.data.local.daos.MovieDao
+import com.ragabz.movieonline.data.remote.MovieApi
+import com.ragabz.movieonline.di.ContextProviders
+import com.ragabz.movieonline.models.MovieList
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    @LocalDatasource val localDatasource: MovieDatasource,
-    @RemoteDatasource val remoteDatasource: MovieDatasource
+    private val movieApi: MovieApi,
+    private val movieDao: MovieDao,
+    private val contextProviders: ContextProviders
 ) {
-    fun search(searchQuery: String): Call<SearchResult> {
-        return remoteDatasource.search(searchQuery)
+
+    suspend fun fetchMoviesListAndSaveToDatabase(): Flow<MovieList> {
+        return flow<MovieList> {
+            try {
+                val response = movieApi.fetchMoviesList()
+                if (response.isSuccessful) {
+                    // save list to database
+                    val list = response.body() as MovieList
+                    movieDao.insert(*list.toTypedArray())
+                    // select list from database
+                    emit(movieDao.selectAllMovies())
+                }
+            } catch (exception: Exception) {
+                emit(emptyList())
+            }
+        }
     }
 
+    suspend fun getCachedMovieList(): Flow<MovieList> {
+        return flowOf(movieDao.selectAllMovies()).flowOn(contextProviders.IO)
+    }
 
+    suspend fun deleteAllMovies() {
+        flow<Unit> {
+            movieDao.deleteAllMovieList()
+        }.flowOn(contextProviders.IO)
+    }
 }

@@ -1,22 +1,21 @@
 package com.ragabz.movieonline.data.local.daos
 
 import androidx.room.*
-import com.ragabz.movieonline.models.MovieEntity
-
+import com.ragabz.movieonline.models.Movie
+import com.ragabz.movieonline.models.MovieList
 
 @Dao
 interface MovieDao {
 
-    @Query("select * from movieentity")
-    fun getMovies(): List<MovieEntity>
+    @Query("select * from movie")
+    suspend fun selectAllMovies(): MovieList
 
-    @Query("select * from movieentity where id=:movieId")
-    fun getMovieById(movieId: Int): MovieEntity
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(vararg movieList: Movie)
 
-    @Insert
-    fun insertMovie(movie: MovieEntity)
+    @Query("select * from movie where id=:movieId")
+    fun getMovieById(movieId: Int): Movie
 
-    @Delete
-    fun deleteMovie(movie: MovieEntity)
-
+    @Query("DELETE FROM movie")
+    fun deleteAllMovieList()
 }

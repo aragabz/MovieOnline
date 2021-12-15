@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+typealias MovieList = List<Movie>
+
 @Entity
 data class Movie(
     @ColumnInfo @SerializedName("description") val description: String,

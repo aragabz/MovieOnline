@@ -5,7 +5,6 @@ import com.ragabz.movieonline.data.local.MovieDatabase
 import com.ragabz.movieonline.data.local.MovieLocalDatasource
 import com.ragabz.movieonline.data.local.daos.MovieDao
 import com.ragabz.movieonline.data.remote.MovieApi
-import com.ragabz.movieonline.data.remote.MovieRemoteDatasource
 import com.ragabz.movieonline.di.qualifiers.LocalDatasource
 import com.ragabz.movieonline.di.qualifiers.RemoteDatasource
 import dagger.Module

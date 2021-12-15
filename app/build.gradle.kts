@@ -74,9 +74,9 @@ dependencies {
     implementation(Libs.Navigation.NAVIGATION_UI_KTX)
 
     implementation(Libs.DI.HILT_ANDROID)
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     kapt(Libs.DI.HILT_COMPILER)
 
@@ -101,6 +101,6 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC2 ")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-RC2 ")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 }
