@@ -13,7 +13,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieOnline">
+        android:theme="@style/Theme.MovieOnline"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.main.ui.MainActivity"
             android:exported="true" />

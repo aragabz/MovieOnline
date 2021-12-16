@@ -6,11 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.ragabz.movieonline.data.local.daos.MovieDao
+import com.ragabz.movieonline.models.Genre
 import com.ragabz.movieonline.models.Movie
 
 const val DB_NAME = "movie_online_database"
 
-@Database(entities = [Movie::class], version = 1)
+@Database(entities = [Movie::class, Genre::class], version = 2)
 @TypeConverters(IntTypeConverter::class)
 abstract class MovieOnlineDatabase : RoomDatabase() {
 
@@ -22,6 +23,6 @@ abstract class MovieOnlineDatabase : RoomDatabase() {
                 context,
                 MovieOnlineDatabase::class.java,
                 DB_NAME
-            ).build()
+            ).allowMainThreadQueries().build()
     }
 }

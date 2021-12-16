@@ -3,12 +3,10 @@ package com.ragabz.movieonline.ui.main.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ragabz.movieonline.data.repositories.MovieRepository
-import com.ragabz.movieonline.models.MovieList
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,15 +14,18 @@ class MoviesViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    private val _moviesList: MutableStateFlow<MovieList> = MutableStateFlow(emptyList())
+    private val _categoriesList = MutableStateFlow(emptyList<CategoryItemModel>())
 
-    val movieList: StateFlow<MovieList> = _moviesList
+    val categpriesList: StateFlow<List<CategoryItemModel>> = _categoriesList
 
     fun getOnlineMoviesList() {
         viewModelScope.launch {
             movieRepository.fetchMoviesListAndSaveToDatabase().collect {
                 // render movies list to ui
-                _moviesList.value = it
+                if (it) {
+                    Timber.i("success will fetch from db")
+                    getCachedMoviesList()
+                }
                 // save time of online fetching movielist
             }
         }
@@ -32,10 +33,32 @@ class MoviesViewModel @Inject constructor(
 
     fun getCachedMoviesList() {
         viewModelScope.launch {
-            movieRepository.getCachedMovieList().collect {
-                // render movies list to ui
-                _moviesList.value = it
+            with(movieRepository) {
+                getCachedGenres().collect { genreList ->
+                    val categoriesList = mutableListOf<CategoryItemModel>()
+                    getCachedMovieList().collect { movieList ->
+                        genreList.forEach { genreItem ->
+                            val filteredMoviesList =
+                                movieList.filter { it.genreIds.contains(genreItem.id) }
+                            if (filteredMoviesList.isNotEmpty()) {
+                                categoriesList.add(
+                                    CategoryItemModel(
+                                        genreItem.name,
+                                        filteredMoviesList
+                                    )
+                                )
+                            }
+                        }
+                        _categoriesList.value = categoriesList
+                    }
+                }
             }
+        }
+    }
+
+    fun deleteAllGenreAndMovies() {
+        viewModelScope.launch {
+            movieRepository.deleteAllGenresAndMovies().collect()
         }
     }
 }

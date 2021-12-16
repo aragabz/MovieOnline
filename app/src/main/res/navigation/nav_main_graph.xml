@@ -10,7 +10,7 @@
         android:id="@+id/navigation_home"
         android:name="com.ragabz.movieonline.ui.main.ui.home.MoviesFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_movies">
 
         <action
             android:id="@+id/action_homeFragment_to_movieDetailsFragment"
@@ -22,7 +22,12 @@
         android:id="@+id/movieDetailsFragment"
         android:name="com.ragabz.movieonline.ui.main.ui.moviedetails.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" >
+        tools:layout="@layout/fragment_movie_details">
+
+        <argument
+            android:name="movie"
+            app:argType="com.ragabz.movieonline.models.Movie" />
+
     </fragment>
 
 </navigation>

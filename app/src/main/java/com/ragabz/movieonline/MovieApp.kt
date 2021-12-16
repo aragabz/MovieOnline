@@ -1,6 +1,7 @@
 package com.ragabz.movieonline
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -8,6 +9,8 @@ import timber.log.Timber
 class MovieApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        // init threetenbp
+        AndroidThreeTen.init(this)
         // init timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 import com.ragabz.movieonline.databinding.ItemMovieBinding
 import com.ragabz.movieonline.extensions.loadImageFromUrl
+import com.ragabz.movieonline.extensions.onClick
 import com.ragabz.movieonline.models.Movie
+import com.ragabz.movieonline.utils.baseImageUrl
 import com.ragabz.picsum.base.ViewBindingHolder
 
-class MoviesAdapter : ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback()) {
+class MoviesAdapter(val listener: ItemClickListener) :
+    ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
@@ -21,7 +24,10 @@ class MoviesAdapter : ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback()) {
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.binding.apply {
             val item = getItem(position)
-            (this as ItemMovieBinding).imageView.loadImageFromUrl(item.posterPath)
+            (this as ItemMovieBinding).imageView.loadImageFromUrl(baseImageUrl + item.posterPath)
+            root.onClick {
+                listener.openMovieDetails(item)
+            }
         }
     }
 
